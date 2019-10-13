@@ -3,3 +3,4 @@
 *.pyc
 .coverage
 .mypy_cache
+.idea
