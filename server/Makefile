@@ -40,6 +40,19 @@ pollgists:
 	${INFO} "Poll for new gists..."
 	@pipenv run src/manage.py gist-poller
 
+buildimage:
+	${INFO} "Building docker image..."
+	@docker build -t gist-checker-server .
+
+runimage:
+	${INFO} "Running docker container (will listen on port 8000)..."
+	@docker run -it -p 8000:8000 gist-checker-server
+
+pollgistsdocker:
+	${INFO} "Running gist-poller on docker container..."
+	@docker run -p 8000:8000 gist-checker-server gist-poller
+
+
 # Cosmetics (changing shell colour)
 YELLOW := "\e[1;33m"
 NO_COLOUR := "\e[0m"
