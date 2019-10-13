@@ -36,6 +36,10 @@ run:
 	${INFO} "Running local development server..."
 	@pipenv run src/manage.py runserver
 
+pollgists:
+	${INFO} "Poll for new gists..."
+	@pipenv run src/manage.py gist-poller
+
 # Cosmetics (changing shell colour)
 YELLOW := "\e[1;33m"
 NO_COLOUR := "\e[0m"

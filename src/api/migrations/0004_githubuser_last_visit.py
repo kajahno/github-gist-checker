@@ -5,15 +5,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('api', '0003_auto_20191013_1752'),
-    ]
+    dependencies = [("api", "0003_auto_20191013_1752")]
 
     operations = [
         migrations.AddField(
-            model_name='githubuser',
-            name='last_visit',
+            model_name="githubuser",
+            name="last_visit",
             field=models.DateTimeField(null=True, default=None),
             preserve_default=False,
-        ),
+        )
     ]

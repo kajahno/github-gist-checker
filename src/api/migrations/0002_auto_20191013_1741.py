@@ -5,18 +5,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('api', '0001_initial'),
-    ]
+    dependencies = [("api", "0001_initial")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='siteactivity',
-            name='id',
-        ),
+        migrations.RemoveField(model_name="siteactivity", name="id"),
         migrations.AlterField(
-            model_name='siteactivity',
-            name='last_visit',
+            model_name="siteactivity",
+            name="last_visit",
             field=models.DateTimeField(primary_key=True, serialize=False),
         ),
     ]

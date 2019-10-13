@@ -5,12 +5,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('api', '0005_auto_20191013_1812'),
-    ]
+    dependencies = [("api", "0005_auto_20191013_1812")]
 
-    operations = [
-        migrations.DeleteModel(
-            name='SiteActivity',
-        ),
-    ]
+    operations = [migrations.DeleteModel(name="SiteActivity")]

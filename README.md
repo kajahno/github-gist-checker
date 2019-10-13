@@ -2,7 +2,7 @@
 
 This project aims to track a set of users' gists and display them
 
-## Project setup
+## Setup
 
 ### Prerequisites
 
@@ -21,8 +21,16 @@ This project aims to track a set of users' gists and display them
   (github-gist-checker) $ pipenv install --dev
   ```
 
+## Development
+
 ### Run local development server
 * Run:
   ```
   $ make run
+  ```
+
+### Run ad-hoc command to update the list of gists
+* Run:
+  ```
+  $ make
   ```
