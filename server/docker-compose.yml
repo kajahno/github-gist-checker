@@ -1,0 +1,34 @@
+version: "3.1"
+
+services:
+  app:
+    build: .
+    ports:
+      - 8000:8000
+    links:
+      - db
+    environment:
+      GIST_APP_DB_NAME: gistchecker
+      GIST_APP_DB_USER: postgres
+      GIST_APP_DB_PASSWD: postgres
+      GIST_APP_DB_HOST: db
+      GIST_APP_DB_PORT: 5432
+
+  db:
+    image: postgres:10
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: gistchecker
+    ports:
+      - 5432:5432
+
+  agent:
+    image: kajahno/ansible
+    links:
+      - db
+    environment:
+      PROBE_HOST: "db"
+      PROBE_PORT: "5432"
+    command: ["probe.yml"]
