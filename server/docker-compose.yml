@@ -13,6 +13,7 @@ services:
       GIST_APP_DB_PASSWD: postgres
       GIST_APP_DB_HOST: db
       GIST_APP_DB_PORT: 5432
+      PORT: 8000
 
   db:
     image: postgres:10

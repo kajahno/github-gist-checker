@@ -3,8 +3,10 @@
 PROJECT ?= gistchecker
 
 NAME ?= gistchecker
-ORG_NAME ?= kajahno
-REPO_NAME ?= gistchecker
+ORG_NAME ?= gcr.io
+# This should match the google cloud project name (if using gcloud)
+REPO_NAME ?= gist-checker
+
 
 # Application Service Name -> must match Docker Compose service name
 APP_SERVICE_NAME := app
@@ -28,7 +30,7 @@ buildimage:
 	${INFO} "Building docker image..."
 	@ docker build -t gist-checker-server .
 
-run: startdb databasemigrationsdocker
+run: startdb migratedb
 	${INFO} "Building images..."
 	@ docker-compose -p $(PROJECT) build --pull app
 	${INFO} "Bringing up app..."
@@ -47,7 +49,7 @@ clean:
 # dockerhub things
 tag:
 	${INFO} "Tagging image with tags $(TAG_ARGS)..."
-	@ $(foreach tag,$(TAG_ARGS), docker tag $(IMAGE_ID) $(ORG_NAME)/$(REPO_NAME):$(tag);)
+	@ $(foreach tag,$(TAG_ARGS), docker tag $(IMAGE_ID) $(ORG_NAME)/$(REPO_NAME)/$(PROJECT):$(tag);)
 	${INFO} "Tagging complete"
 
 login:
@@ -62,7 +64,7 @@ logout:
 
 publish:
 	${INFO} "Publishing image ${IMAGE_ID} to ${ORG_NAME}/${REPO_NAME}..."
-	@ $(foreach tag,$(shell echo $(REPO_EXPR)), docker push $(tag);)
+	$(foreach tag,$(shell echo $(REPO_EXPR)), docker push $(tag);)
 
 
 # Cosmetics (changing shell colour)
@@ -75,11 +77,16 @@ INFO := @bash -c '\
 	echo "=> $$1"; \
 printf $(NO_COLOUR)' VALUE
 
+
 # Get container id of application service container
 APP_CONTAINER_ID := $$(docker-compose -p $(PROJECT) ps -q $(APP_SERVICE_NAME))
 
 # Get image id of application service
 IMAGE_ID := $$(docker inspect -f '{{ .Image }}' $(APP_CONTAINER_ID))
+
+# Introspect repository tags
+REPO_EXPR := $$(docker inspect -f '{{range .RepoTags}}{{.}} {{end}}' $(IMAGE_ID) | grep -oh "$(ORG_NAME).*" | xargs)
+
 
 # Extract tag arguments
 ifeq (tag,$(firstword $(MAKECMDGOALS)))

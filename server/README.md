@@ -46,14 +46,14 @@ This project aims to track a set of users' gists and display them
 
 ### Build image
 
-Run app:
+Builds the docker image:
   ```
   $ make build
   ```
 
 ### Run image and map to port 8000
 
-This will start a database, apply the migrations, and start the app
+This will start a local database, apply the migrations, and start the app
 
 Run:
   ```
@@ -84,7 +84,13 @@ Run:
 
 ### Publish image
 
+Login:
+  ```
+  [nix-shell] $ gcloud auth configure-docker
+  ```
+  > Note: see [here](../infra/README.md#Prerequisites) how to get gcloud easily
 Run:
   ```
   $ make publish
   ```
+> **Note**: this is configured to push the image to a Google Container registry, but it's quite easy to change to another one (such as Dockerhub).
