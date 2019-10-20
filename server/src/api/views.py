@@ -53,7 +53,13 @@ class GistLastAddedViewSet(viewsets.ReadOnlyModelViewSet):
             logger.error(msg)
             return Response(msg, status=status.HTTP_400_BAD_REQUEST)
 
-        github_user_db = GithubUser.objects.get(username=github_user)
+        try:
+            github_user_db = GithubUser.objects.get(username=github_user)
+        except GithubUser.DoesNotExist:
+            msg = {"github_user": "'{}' Not found in database".format(github_user)}
+            logger.error(msg)
+            return Response(msg, status=status.HTTP_400_BAD_REQUEST)
+
         logging.info(
             "user: {}, found in database: {}".format(
                 github_user, "true" if github_user_db else "false"
