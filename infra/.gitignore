@@ -1,2 +1,6 @@
 .terraform
 credentials.json
+node_modules
+cloud_func.zip
+stopvm.bash
+startvm.bash

@@ -12,7 +12,7 @@ SECRET_KEY = "#sf%5s^1sznr%e^+===+2$v!+g7!p5_3b+z1h3n)z_xi^^y86$"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 INSTALLED_APPS = [
@@ -101,7 +101,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
+STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, "staticfiles"))
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
 # )

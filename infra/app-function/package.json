@@ -1,0 +1,15 @@
+{
+  "name": "app-adhoc-runner",
+  "version": "0.0.1",
+  "description": "Runs a specific command within the VM, then shuts down the VM\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/compute": "^1.1.5",
+    "escape-html": "^1.0.3"
+  }
+}
