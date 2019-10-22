@@ -265,7 +265,7 @@ resource "google_cloud_scheduler_job" "autostarter" {
   description           = "starts the virtual machine every 3 hours"
   project               = "${var.project_id}"
   region                = "${var.region}"
-  schedule              = "* */3 * * *"
+  schedule              = "0 */3 * * *"
   time_zone             = "Europe/London"
 
   http_target {
@@ -285,7 +285,7 @@ resource "google_cloud_scheduler_job" "autostopper" {
   description           = "stops the virtual machine every 10th minute"
   project               = "${var.project_id}"
   region                = "${var.region}"
-  schedule              = "*/10 * * * *"
+  schedule              = "10 */3 * * *"
   time_zone             = "Europe/London"
 
   http_target {
